@@ -15,7 +15,15 @@
         <!-- Styles -->
         @livewireStyles
 
+        <!-- Icons pack -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <!-- ChartJS -->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js"></script>
+
         <!-- Scripts -->
+        <script src="{{ asset('admin-template/dashboard.js') }}"></script>
+        <script src="{{ asset('admin-template/dashboard-chart.js')}}"></script>
+
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">

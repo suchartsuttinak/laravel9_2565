@@ -54,29 +54,36 @@
             <div x-show="open" @click.outside="open = false" class="dropdown-content -right-6 sm:-right-8 md:right-1 text-left" x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 scale-y-0 transform" x-transition:enter-end="opacity-100 scale-y-100 transform" x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" style="display: none;">
 
                 <div class='p-3 text-sm text-gray-500 border-b border-gray-100'>
-                    Signed in as
-                    <span class='block text-theme-darked-primary'>Mehrab Hojjati Pour</span>
+                    ยินดีต้อนรับ
+                    <span class='block text-theme-darked-primary'>{{ Auth::user()->name }}</span>
                 </div>
 
-                <a class='flex items-center w-full p-3 hover:bg-theme-secondary transition duration-200' href="#">
+                <a class='flex items-center w-full p-3 hover:bg-theme-secondary transition duration-200' href="{{ route('welcome') }}">
                     <ion-icon class='mr-2' name="compass-outline"></ion-icon>
                     Visit site
                 </a>
 
-                <a class='flex items-center w-full p-3 hover:bg-theme-secondary transition duration-200' href="#">
-                    <ion-icon class='mr-2' name="wallet-outline"></ion-icon>
-                    Manage wallet
-                </a>
-
-                <a class='flex items-center w-full p-3 hover:bg-theme-secondary transition duration-200' href="#">
+                <a class='flex items-center w-full p-3 hover:bg-theme-secondary transition duration-200' href="{{ route('profile.show') }}">
                     <ion-icon class='mr-2' name="create-outline"></ion-icon>
                     Edit profile
                 </a>
 
-                <a class='flex items-center w-full p-3 text-red-500 hover:bg-red-50 transition duration-200 border-t border-gray-100' href="#">
+                {{--  <a class='flex items-center w-full p-3 text-red-500 hover:bg-red-500 transition duration-200 border-t border-gray-100' href="#">
                     <ion-icon class='mr-2' name="log-out-outline"></ion-icon>
                     Logout
-                </a>
+                </a>  --}}
+                <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}" x-data>
+                                @csrf
+
+                                <a
+                                class="text-lg flex items-center w-full p-3 text-red-500 hover:bg-red-50 transition duration-200 border-t border-gray-100"
+                                href="{{ route('logout') }}"
+                                         @click.prevent="$root.submit();">
+                                         <ion-icon class='mr-2' name="log-out-outline"></ion-icon>
+                                    {{ __('Log Out') }}
+                            </a>
+                            </form>
 
             </div>
         </div>
@@ -85,24 +92,23 @@
 
 <aside class="sidebar hidden lg:block left-0">
     <header>
-        <h1>ZedAdmin<span>.</span></h1>
+        <h1>Suchart Template<span>.</span></h1>
     </header>
     <nav>
         <ul>
             <li class="badge">Main Menu</li>
-            <li class="active">
-                <a href="./index.html">
-                    <ion-icon name="planet"></ion-icon>
+            <li class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                <a href="{{ route('dashboard') }}">
+                    <ion-icon name="Home"></ion-icon>
                     Dashboard
                 </a>
             </li>
-            <li>
-                <a href="./index-rtl.html">
-                    <ion-icon class="-rotate-45" name="planet"></ion-icon>
-                    RTL Dashboard
+            <li class="{{ request()->routeIs('welcome') ? 'active' : '' }}">
+                <a href="{{ route('welcome') }}">
+                    <ion-icon name="person"></ion-icon>
+                    ข้อมูลผู้ใช้งาน
                 </a>
             </li>
-
         </ul>
     </nav>
 </aside>
